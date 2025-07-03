@@ -155,7 +155,9 @@ module ActiveModel
             end
           end
 
-          validates_confirmation_of attribute, allow_blank: true
+          # Skip confirmation validation only when the password is nil so that
+          # whitespace-only passwords still require a matching confirmation.
+          validates_confirmation_of attribute, allow_nil: true
         end
 
         # Only generate tokens for records that are capable of doing so (Active Records, not vanilla Active Models)
